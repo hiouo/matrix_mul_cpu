@@ -1,9 +1,11 @@
 #include <iostream>
 #include <chrono>
 #include <fstream>
+#include <omp.h>
 
-// Function for matrix multiplication on the CPU
+// Function for matrix multiplication on the CPU with OpenMP
 void matrixMultiplyCPU(float* A, float* B, float* C, int N) {
+    #pragma omp parallel for collapse(2)
     for (int row = 0; row < N; ++row) {
         for (int col = 0; col < N; ++col) {
             float value = 0;
