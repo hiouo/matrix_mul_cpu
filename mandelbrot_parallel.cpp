@@ -6,7 +6,6 @@
 #include <iostream>
 #include <vector>
 #include <mpi.h>
-#include <omp.h>
 #include "stb_image_write.h"
 
 #define MaxRepeats 10000
@@ -90,7 +89,6 @@ int main(int argc, char *argv[]) {
 
     unsigned char *local_image = new unsigned char[(end_row - start_row) * WIDTH * 3];
 
-    #pragma omp parallel for collapse(2)
     for (int y = start_row; y < end_row; y++) {
         for (int x = 0; x < WIDTH; x++) {
             complex<double> c((x - WIDTH / 2.0) * 4.0 / WIDTH,
