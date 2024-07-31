@@ -89,6 +89,10 @@ int main(int argc, char *argv[]) {
 
     unsigned char *local_image = new unsigned char[(end_row - start_row) * WIDTH * 3];
 
+    // 使用非阻塞通信來提高效率
+    MPI_Request request;
+    MPI_Ibcast(&trap, sizeof(trap), MPI_BYTE, 0, MPI_COMM_WORLD, &request);
+
     for (int y = start_row; y < end_row; y++) {
         for (int x = 0; x < WIDTH; x++) {
             complex<double> c((x - WIDTH / 2.0) * 4.0 / WIDTH,
